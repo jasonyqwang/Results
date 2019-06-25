@@ -1,0 +1,23 @@
+{
+    "name": "jsyqw/results",
+    "description": "结果返回,返回JSON数组,Api接口格式，APi设计",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jason Wang",
+            "email": "jasonwang1211@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Jsyqw\\Ret\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jsyqw\\Ret\\": "src/"
+        }
+    }
+}
