@@ -1,5 +1,11 @@
 # Results 处理结果类的封装
 
+## 安装
+
+    composer require jsyqw/results
+
+## 使用说明
+
 * 一般用于返回统一格式的时候使用（API）
 * 使用的模式三种
     
