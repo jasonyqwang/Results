@@ -94,7 +94,7 @@ trait Results
      * 处理成功返回
      * @param array $data
      * @param string $msg
-     * @param array $params
+     * @param array $params 和code同级的数据
      * @param Closure|null $callback
      * @return array
      */
@@ -111,16 +111,18 @@ trait Results
     /**
      * 处理错误返回,参数错误
      * @param string $msg
-     * @param array $params
+     * @param array $data
+     * @param array $params 和code同级的数据
      * @param Closure|null $callback
      * @return array
      */
-    public function paramsError($msg = '', $params = [], Closure $callback = null)
+    public function paramsError($msg = '', $data = [], $params = [], Closure $callback = null)
     {
         $code = self::$CODE_ERROR_PARAMS;
         $arr = array_merge([
             'code' => $code,
             'msg' => $msg,
+            'data' => $data
         ], $params);
         return $this->returnJson($arr, $callback);
     }
@@ -129,15 +131,17 @@ trait Results
      * 处理错误返回
      * @param string $msg
      * @param int $code
-     * @param array $params
+     * @param array $data
+     * @param array $params 和code同级的数据
      * @param Closure|null $callback
      * @return array
      */
-    public function error($msg = '', $code = 2000, $params = [], Closure $callback = null)
+    public function error($msg = '', $code = 2000, $data = [], $params = [], Closure $callback = null)
     {
         $arr = array_merge([
             'code' => $code,
             'msg' => $msg,
+            'data' => $data
         ], $params);
         return $this->returnJson($arr, $callback);
     }
@@ -145,37 +149,52 @@ trait Results
     /**
      * 认证错误
      * @param string $msg
-     * @param array $params
+     * @param array $data
+     * @param array $params 和code同级的数据
      * @param Closure|null $callback
      * @return array
      */
-    public function authError($msg = '', $params = [], Closure $callback = null)
+    public function authError($msg = '', $data = [], $params = [], Closure $callback = null)
     {
         $arr = array_merge([
             'code' => self::$CODE_ERROR_AUTH,
-            'msg' => $msg
+            'msg' => $msg,
+            'data' => $data
         ], $params);
         return $this->returnJson($arr, $callback);
     }
 
     /**
      * 设置错误码
-     *
      * @param int $code
+     * @return $this
      */
     public function setCode($code)
     {
         $this->arrJson['code'] = $code;
+        return $this;
     }
 
     /**
      * 设置错误信息
-     *
      * @param string $msg
+     * @return $this
      */
     public function setMsg($msg = '')
     {
         $this->arrJson['msg'] = $msg;
+        return $this;
+    }
+
+    /**
+     * 设置data信息
+     * @param array $data
+     * @return $this
+     */
+    public function setData($data)
+    {
+        $this->arrJson['data'] = $data;
+        return $this;
     }
 
     /**

@@ -61,15 +61,17 @@
         //返回 
         $this->success($data = [], $msg = '', $params = [], Closure $callback = null);
         
-        $this->paramsError($msg = '', $params = [], Closure $callback = null);
+        $this->paramsError($msg = '', $data = [], $params = [], Closure $callback = null);
         
-        $this->error($msg = '', $code = 2000, $params = [], Closure $callback = null);
+        $this->error($msg = '', $code = 2000, $data = [], $params = [], Closure $callback = null);
         
-        $this->authError($params = [], Closure $callback = null);
+        $this->authError($params = [], $data = [], Closure $callback = null);
         
         $this->setCode($code);
         
         $this->setMsg($msg = '');
+        
+        $this->setData($data);
     }
     
     //返回格式： 
