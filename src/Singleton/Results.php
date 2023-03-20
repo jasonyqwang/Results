@@ -4,7 +4,7 @@
  * @author  jason <jasonwang1211@gmail.com>
  */
 
-namespace Jsyqw\ret\Singleton;
+namespace Jsyqw\Ret\Singleton;
 
 
 class Results

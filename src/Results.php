@@ -9,8 +9,4 @@ namespace Jsyqw\Ret;
 class Results
 {
   use \Jsyqw\Ret\Traits\Results;
-
-  public function a(){
-      \Jsyqw\ret\Singleton\Results::instance()->success();
-  }
 }

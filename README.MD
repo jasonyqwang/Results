@@ -24,23 +24,21 @@
     //默认返回的消息
     protected static $defaultMsgList = [
         //成功
-        0 =>    '操作成功',
-        
-        //1001 - 1999 客户端引起的错误
-        1002 => '非法请求',//（post & get 请求不正确）
-        1003 => '参数错误',//具体是什么参数错误，可以在返回的时候输入msg参数
-        1004 => '签名无效',//--基类
-        1005 => '请求无效',//（时间校验失败）--基类
+        Codes::CODE_SUCCESS => '操作成功',
+        //1000 - 1999 客户端引起的错误
+        Codes::CODE_ERROR_INVALID => '非法请求',//（post & get 请求不正确）
+        Codes::CODE_ERROR_PARAMS => '参数错误',//各种参数错误，具体是什么参数错误，可以在返回的时候输入msg参数
+        Codes::CODE_ERROR_SIGN => '签名无效',//--基类
+        Codes::CODE_ERROR_TIME => '请求无效',//（时间校验失败）--基类
 
         //2000 - 2999 服务器的业务交互的错误提示(包括约定好的特殊状态码）
-        2000 => '服务器繁忙',    //服务器返回友好提示
-        2001 => '未知错误',
-        2002 => '没有更多数据了',//（针对列表式加载更多）
-        2003 => '暂无数据',//数据不存在
-        2004 => '认证错误',//token 无效--基类
+        Codes::CODE_ERROR_SERVER => '服务器繁忙',    //服务器返回友好提示
+        Codes::CODE_ERROR_AUTH => '认证错误',//token 无效--基类【特殊】
+        Codes::CODE_ERROR_ACCESS => '没有权限',//没有接口的权限
+        Codes::CODE_ERROR_UNKNOWN => '未知错误',
 
-        //3001 - 4000 服务器错误（用户自定义的错误，都应该在这个段，比如 try catch 到的异常信息）
-        3001 => '服务器处理异常',
+        //3000 - 4000 服务器错误（比如 try catch 到的异常信息，客户端不能直接显示警告）
+        Codes::CODE_ERROR_SERVICE => '服务器处理异常',
     ];
 
 ```
@@ -56,7 +54,7 @@
         use Jsyqw\Ret\Results;
         
         //返回json数组 
-        $this->returnJson($array = null, Closure $callback = null);
+        $this->returnJson(DataModel $dataModel, Closure $callback = null);
         
         //返回 
         $this->success($data = [], $msg = '', $params = [], Closure $callback = null);
@@ -66,12 +64,6 @@
         $this->error($msg = '', $code = 2000, $data = [], $params = [], Closure $callback = null);
         
         $this->authError($params = [], $data = [], Closure $callback = null);
-        
-        $this->setCode($code);
-        
-        $this->setMsg($msg = '');
-        
-        $this->setData($data);
     }
     
     //返回格式： 
@@ -80,6 +72,5 @@
         'msg'  => '',
         'data' => [],
         'time' => 0
-    ]
-    
+    ];
 ```
