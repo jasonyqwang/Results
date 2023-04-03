@@ -24,7 +24,7 @@ class DataModel
             'code' => $this->code,
             'msg' => $this->msg,
             'data' => $this->data ? $this->data : (object)[],
-            'time' => $this->time ?? time()
+            'time' => $this->time ?: time()
         ];
         return array_merge($this->params, $retData);
     }
